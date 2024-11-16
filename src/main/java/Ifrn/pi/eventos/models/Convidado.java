@@ -47,6 +47,12 @@ public class Convidado {
 
 	public void setEvento(Evento evento) {
 		this.evento = evento;
-	} 
+	}
 
+	public void save(Convidado convidado) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }
