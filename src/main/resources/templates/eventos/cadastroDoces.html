@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Cadastro de Doce</title>
+    <style>
+        /* Ajustando o campo de preço para fontes menores */
+        .input-field input[type="text"] {
+            padding-left: 2.5rem; /* Espaço à esquerda para o cifrão */
+            font-size: 1.2rem; /* Tamanho menor da fonte do campo de preço */
+            line-height: 1.8rem; /* Alinha verticalmente o texto */
+        }
+
+        .input-field .cifrao {
+            position: absolute;
+            font-size: 1.1rem; /* Tamanho menor do cifrão proporcional ao preço */
+            left: 10px; /* Posição do cifrão dentro do campo */
+            top: 50%;
+            transform: translateY(-50%); /* Alinha verticalmente o cifrão */
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h1>Cadastrar Novo Doce</h1>
+
+        <!-- Mensagem de erro do servidor -->
+        <p th:if="${mensagemErro}" th:text="${mensagemErro}" class="red-text"></p>
+
+        <form th:action="@{/doces}" th:object="${doce}" method="post">
+            <!-- Campo Nome -->
+            <div class="input-field" th:classappend="${#fields.hasErrors('nome')} ? 'invalid' : ''">
+                <input type="text" id="nome" th:field="*{nome}" class="validate" required />
+                <label for="nome">Nome</label>
+                <!-- Mensagem de erro do campo -->
+                <span class="helper-text" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+            </div>
+
+            <!-- Campo Preço com Cifrão -->
+            <div class="input-field" th:classappend="${#fields.hasErrors('preco')} ? 'invalid' : ''">
+                <i class="cifrao">R$</i> <!-- Cifrão ajustado com o mesmo tamanho proporcional ao preço -->
+                <input type="text" id="preco" th:field="*{preco}" class="validate" required />
+                <label for="preco">Preço</label>
+                <span class="helper-text" th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}"></span>
+            </div>
+
+            <!-- Botão de envio -->
+            <button type="submit" class="btn">Cadastrar</button>
+        </form>
+
+        <p th:if="${mensagem}" th:text="${mensagem}"></p>
+        <a href="/doces" class="btn">Voltar para a lista de doces</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

@@ -75,15 +75,9 @@ public class EventosController {
     }
 
     @PostMapping("/{idEvento}")
-    public String salvarConvidado(@PathVariable Long idEvento, @Valid Convidado convidado, BindingResult result, RedirectAttributes attributes) {
+    public String salvarConvidado(@PathVariable Long idEvento, Convidado convidado, RedirectAttributes attributes) {
         System.out.println("id do evento: " + idEvento);
         System.out.println(convidado);
-
-        // Verifica se houve erro na validação do convidado
-        if (result.hasErrors()) {
-            attributes.addFlashAttribute("mensagemErro", "Erro ao salvar o convidado. Verifique os campos.");
-            return "redirect:/eventos/" + idEvento; // Retorna para a página de detalhes do evento
-        }
 
         Optional<Evento> opt = er.findById(idEvento);
 
@@ -94,11 +88,10 @@ public class EventosController {
         Evento evento = opt.get();
         convidado.setEvento(evento);
         cr.save(convidado);
+        attributes.addFlashAttribute("mensagem", "Convidado salvo com sucesso");
 
-        attributes.addFlashAttribute("mensagem", "Convidado salvo com sucesso!");
-        return "redirect:/eventos/" + idEvento; // Redireciona para a página de detalhes do evento
+        return "redirect:/eventos/{idEvento}";
     }
-
     @GetMapping("/{id}/selecionar")
     public ModelAndView selecionarEvento(@PathVariable long id) {
     	ModelAndView md = new ModelAndView();
@@ -158,33 +151,29 @@ public class EventosController {
     @GetMapping("/{idEvento}/convidados/{idConvidado}/remover")
     public String removerConvidado(@PathVariable long idEvento, @PathVariable long idConvidado, RedirectAttributes attributes) {
         Optional<Evento> optEvento = er.findById(idEvento);
-
-        if (optEvento.isEmpty()) {
-            attributes.addFlashAttribute("mensagemErro", "Evento não encontrado.");
+        
+        if(optEvento.isEmpty()) {
             return "redirect:/eventos";
         }
-
+        
         Evento evento = optEvento.get();
-
+        
         Optional<Convidado> optConvidado = cr.findById(idConvidado);
-
-        if (optConvidado.isEmpty()) {
-            attributes.addFlashAttribute("mensagemErro", "Convidado não encontrado.");
+        
+        if(optConvidado.isEmpty()) {
             return "redirect:/eventos/" + idEvento;
         }
-
+        
         Convidado convidado = optConvidado.get();
-
-        if (convidado.getEvento().getId() != evento.getId()) {
-            attributes.addFlashAttribute("mensagemErro", "O convidado não pertence a este evento.");
+        
+        if(convidado.getEvento().getId() != evento.getId()) {
             return "redirect:/eventos/" + idEvento;
         }
-
+        
         cr.delete(convidado);
-        attributes.addFlashAttribute("mensagem", "Convidado removido com sucesso!");
-
+        attributes.addFlashAttribute("mensagem", "Convidado removido com sucesso");
+        
         return "redirect:/eventos/" + idEvento;
     }
 
-
-    } 
+    }

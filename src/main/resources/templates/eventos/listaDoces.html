@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Inclui Material Icons -->
+    <title>Lista de Doces</title>
+</head>
+<body>
+	<div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h1>Doces Cadastrados</h1>
+
+        <p th:if="${mensagem}" th:text="${mensagem}"></p>
+        <table class="highlight">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="doce : ${doces}">
+                    <td th:text="${doce.id}"></td>
+                    <td th:text="${doce.nome}"></td>
+                    <td th:text="${doce.preco}"></td>
+                    <td>
+                        <a th:href="@{/doces/{id}/remover(id=${doce.id})}" class="btn-floating red">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/doces/form" class="btn">Cadastrar Novo Doce</a>
+    </div>
+</body>
+</html>
