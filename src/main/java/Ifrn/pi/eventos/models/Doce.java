@@ -15,9 +15,7 @@ public class Doce {
 
     private String nome; // Nome do doce
     private double preco; // Preço do doce
-    
-    @ManyToOne
-    private Evento evento; // Associação com a entidade Evento
+   // Associação com a entidade Evento
 
     // Getters e Setters
     public long getId() {
@@ -44,11 +42,4 @@ public class Doce {
         this.preco = preco;
     }
 
-    public Evento getEvento() {
-        return evento;
-    }
-
-    public void setEvento(Evento evento) {
-        this.evento = evento;
-    }
 }

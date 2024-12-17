@@ -5,51 +5,47 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
 
-@Entity 
+@Entity
 public class Convidado {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	@NotBlank 
-	private String nome;
-	@NotBlank
-	private String rg;
-	
-	@ManyToOne
-	private Evento evento;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String localE;
+    private String metodoP;
 
-	public long getId() {
-		return id;
-	}
+    @ManyToOne
+    private Evento evento;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getLocalE() { // Corrigido o nome do método
+        return localE;
+    }
 
-	public String getRg() {
-		return rg;
-	}
+    public void setLocalE(String localE) { // Corrigido o nome do método
+        this.localE = localE;
+    }
 
-	public void setRg(String rg) {
-		this.rg = rg;
-	}
+    public String getMetodoP() { // Corrigido o nome do método
+        return metodoP;
+    }
 
-	public Evento getEvento() {
-		return evento;
-	}
+    public void setMetodoP(String metodoP) { // Corrigido o nome do método
+        this.metodoP = metodoP;
+    }
 
-	public void setEvento(Evento evento) {
-		this.evento = evento;
-	}
-	
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
 }

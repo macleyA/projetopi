@@ -4,12 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Evento {
@@ -17,19 +15,22 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
+    @NotBlank(message = "O nome é obrigatório.")
     private String nome;
 
-    @NotBlank
-    private String local;
+    @NotNull(message = "A quantidade é obrigatória.")
+    @Min(value = 1, message = "A quantidade deve ser no mínimo 1.")
+    private Integer qtd;
 
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate data;
+    @NotNull(message = "O preço é obrigatório.")
+    @DecimalMin(value = "0.01", message = "O preço deve ser maior que zero.")
+    private Double preco;
 
-    @NotNull
-    private LocalTime horario;
+    @NotNull(message = "O valor total é obrigatório.")
+    @DecimalMin(value = "0.01", message = "O valor total deve ser maior que zero.")
+    private Double valorT;
 
+    // Getters e setters
     public long getId() {
         return id;
     }
@@ -46,32 +47,32 @@ public class Evento {
         this.nome = nome;
     }
 
-    public String getLocal() {
-        return local;
+    public Integer getQtd() {
+        return qtd;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public void setQtd(Integer qtd) {
+        this.qtd = qtd;
     }
 
-    public LocalDate getData() {
-        return data;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
-    public LocalTime getHorario() {
-        return horario;
+    public Double getValorT() {
+        return valorT;
     }
 
-    public void setHorario(LocalTime horario) {
-        this.horario = horario;
+    public void setValorT(Double valorT) {
+        this.valorT = valorT;
     }
 
     @Override
     public String toString() {
-        return "Evento [id=" + id + ", nome=" + nome + ", local=" + local + ", data=" + data + ", horario=" + horario + "]";
+        return "Evento [id=" + id + ", nome=" + nome + ", quantidade=" + qtd + ", preço=" + preco + ", valor total=" + valorT + "]";
     }
 }

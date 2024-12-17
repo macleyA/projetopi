@@ -21,9 +21,9 @@
                         <span class="card-title">Evento</span>
                         <p><strong>Id:</strong> <span th:text="${evento.id}">1</span></p>
                         <p><strong>Nome:</strong> <span th:text="${evento.nome}">Aniversário de José</span></p>
-                        <p><strong>Local:</strong> <span th:text="${evento.local}">Club</span></p>
-                        <p><strong>Data:</strong> <span th:text="${evento.data}">25/02/2021</span></p>
-                        <p><strong>Horário:</strong> <span th:text="${evento.horario}">20:00</span></p>
+                        <p><strong>Preço:</strong> <span th:text="${evento.preco}">Club</span></p>
+                        <p><strong>Quantidade:</strong> <span th:text="${evento.qtd}">25/02/2021</span></p>
+                        <p><strong>Valor Total:</strong> <span th:text="${evento.valorT}">20:00</span></p>
                     </div>
                 </div>
             </div>
@@ -33,18 +33,18 @@
             <div class="col s12">
                 <div class="card">
                     <div class="card-content">
-                        <span class="card-title">Adicionar convidado</span>
+                        <span class="card-title">Informe o local de entrega e método de pagamento</span>
                         <form th:action="@{/eventos/{idEvento}(idEvento=${evento.id})}" method="post">
                             <div>
                                 <input type="hidden" name="id" th:value="${convidado.id}" readonly="readonly">
                             </div>
                             <div>
-                                <label>Nome:</label>
-                                <input type="text" name="nome" th:value="${convidado.nome}">
+                                <label>:Local de entrega:</label>
+                                <input type="text" name="localE" th:value="${convidado.localE}">
                             </div>
                             <div>
-                                <label>RG:</label>
-                                <input type="text" name="rg" th:value="${convidado.rg}">
+                                <label>Método de pagamento:</label>
+                                <input type="text" name="metodoP" th:value="${convidado.metodoP}">
                             </div>
                             <div>
                                 <button type="submit" class="btn">Salvar</button>
@@ -60,21 +60,21 @@
             <div class="col s12">
                 <div class="card">
                     <div class="card-content">
-                        <span class="card-title">Convidados</span>
+                        <span class="card-title">Informações Complementares</span>
                         <table class="highlight">
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Nome</th>
-                                    <th>RG</th>
+                                    <th>Local</th>
+                                    <th>Método de Pagamento</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="c : ${convidados}">
                                     <td th:text="${c.id}">1</td>
-                                    <td th:text="${c.nome}">Fernando</td>
-                                    <td th:text="${c.rg}">123</td>
+                                    <td th:text="${c.localE}">Fernando</td>
+                                    <td th:text="${c.metodoP}">123</td>
                                     <td>
                                         <a th:href="@{/eventos/{idEvento}/convidados/{idConvidado}/selecionar(idEvento=${evento.id}, idConvidado=${c.id})}">
                                             <i class="material-icons red-text">edit</i>

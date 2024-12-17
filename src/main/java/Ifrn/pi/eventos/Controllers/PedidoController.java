@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model; 
+import org.springframework.ui.Model; // Import correto
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,7 +42,7 @@ public class PedidoController {
         }
 
         Doce doce = opt.get();
-        Pedido pedido = new Pedido(doce, quantidade, formaDePagamento); 
+        Pedido pedido = new Pedido(doce, quantidade, formaDePagamento); // Inclui a forma de pagamento
         pedidoR.save(pedido);
 
         attributes.addFlashAttribute("mensagem", "Pedido realizado com sucesso!");
@@ -53,9 +53,9 @@ public class PedidoController {
 
     @GetMapping("/pedidos/listar")
     public ModelAndView listar() {
-        List<Pedido> pedidos = pedidoR.findAll(); 
+        List<Pedido> pedidos = pedidoR.findAll(); // Lista todos os pedidos
         ModelAndView mv = new ModelAndView("eventos/listaPedidos");
-        mv.addObject("pedidos", pedidos); 
+        mv.addObject("pedidos", pedidos); // Passa a lista de pedidos para a view
         return mv;
     }
     @GetMapping("/pedidos/{id}/remover")

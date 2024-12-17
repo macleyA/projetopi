@@ -9,11 +9,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
+    <!-- Menu de Navegação -->
     <nav th:replace="~{menu :: menu}"></nav>
 
     <div class="container">
         <h1 class="center-align">Fazer Pedido</h1>
 
+        <!-- Mensagens de feedback -->
         <div>
             <p th:if="${mensagem}" th:text="${mensagem}" class="mensaje-sucesso"></p>
             <p th:if="${mensagemErro}" th:text="${mensagemErro}" class="mensaje-erro"></p>
@@ -28,6 +30,7 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- Listagem dos doces -->
                 <tr th:each="doce : ${doces}">
                     <td th:text="${doce.nome}"></td>
                     <td th:text="${doce.preco}"></td>
@@ -57,6 +60,7 @@
         <a class="btn waves-effect waves-light" href="/eventos">Voltar para Eventos</a>
     </div>
 
+    <!-- Inicialização do Materialize -->
    //<script>
         document.addEventListener('DOMContentLoaded', function () {
             const elems = document.querySelectorAll('select');

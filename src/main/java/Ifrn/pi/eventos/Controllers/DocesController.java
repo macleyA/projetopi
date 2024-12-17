@@ -27,25 +27,25 @@ public class DocesController {
 
     @GetMapping("/form")
     public String formDoce(Doce doce) {
-        return "eventos/cadastroDoce"; 
+        return "eventos/cadastroDoce"; // Tela de cadastro de doces
     }
 
     @PostMapping
     public String salvar(@Valid Doce doce, BindingResult result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            return formDoce(doce); 
+            return formDoce(doce); // Se houver erros, volta para o formulário
         }
 
-        doceR.save(doce); 
+        doceR.save(doce); // Salva o doce
         attributes.addFlashAttribute("mensagem", "Doce salvo com sucesso");
-        return "redirect:/doces"; 
+        return "redirect:/doces"; // Redireciona para a lista de doces
     }
 
     @GetMapping
     public ModelAndView listar() {
-        List<Doce> doces = doceR.findAll(); 
+        List<Doce> doces = doceR.findAll(); // Lista todos os doces
         ModelAndView mv = new ModelAndView("eventos/listaDoces");
-        mv.addObject("doces", doces); 
+        mv.addObject("doces", doces); // Passa a lista de doces para a view
         return mv;
     }
 
