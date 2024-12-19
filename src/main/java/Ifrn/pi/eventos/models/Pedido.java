@@ -28,7 +28,7 @@ public class Pedido {
 	public Pedido(Doce doce, int quantidade, String formaDePagamento) {
 		this.doce = doce;
 		this.quantidade = quantidade;
-		this.valorTotal = doce.getPreco() * quantidade; // Calcula o valor total
+		this.valorTotal = doce.getPreco() * quantidade; 
 		this.formaDePagamento = formaDePagamento;
 	}
 

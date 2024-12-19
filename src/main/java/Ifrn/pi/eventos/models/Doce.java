@@ -11,13 +11,11 @@ public class Doce {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id; // Identificador único
+    private long id; 
 
-    private String nome; // Nome do doce
-    private double preco; // Preço do doce
-   // Associação com a entidade Evento
-
-    // Getters e Setters
+    private String nome; 
+    private double preco; 
+   
     public long getId() {
         return id;
     }

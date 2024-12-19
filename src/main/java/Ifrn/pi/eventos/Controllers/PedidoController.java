@@ -42,7 +42,7 @@ public class PedidoController {
         }
 
         Doce doce = opt.get();
-        Pedido pedido = new Pedido(doce, quantidade, formaDePagamento); // Inclui a forma de pagamento
+        Pedido pedido = new Pedido(doce, quantidade, formaDePagamento); 
         pedidoR.save(pedido);
 
         attributes.addFlashAttribute("mensagem", "Pedido realizado com sucesso!");
@@ -53,9 +53,9 @@ public class PedidoController {
 
     @GetMapping("/pedidos/listar")
     public ModelAndView listar() {
-        List<Pedido> pedidos = pedidoR.findAll(); // Lista todos os pedidos
+        List<Pedido> pedidos = pedidoR.findAll(); 
         ModelAndView mv = new ModelAndView("eventos/listaPedidos");
-        mv.addObject("pedidos", pedidos); // Passa a lista de pedidos para a view
+        mv.addObject("pedidos", pedidos); 
         return mv;
     }
     @GetMapping("/pedidos/{id}/remover")
